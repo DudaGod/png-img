@@ -1,45 +1,43 @@
 language: node_js
 sudo: false
-
 node_js:
-  - "8"
-  - "10"
-  - "12"
-
+- '8'
+- '10'
+- '12'
 matrix:
   include:
-    - name: "Linux - Node 12"
-      os: linux
-      node_js: "12"
-      env:
-        - CXX=g++-4.9
-        - CC=gcc-4.9
-      addons:
-        apt:
-          sources:
-          - ubuntu-toolchain-r-test
-          packages:
-          - gcc-4.9
-          - g++-4.9
-    - name: "OS X - Node 12"
-      os: osx
-      node_js: "12"
-      osx_image: xcode11
-      compiler: clang
-      env:
-        - CXX=g++
-        - CC=gcc
+  - name: Linux - Node 12
+    os: linux
+    node_js: '12'
+    env:
+    - CXX=g++-4.9
+    - CC=gcc-4.9
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - gcc-4.9
+        - g++-4.9
+  - name: OS X - Node 12
+    os: osx
+    node_js: '12'
+    osx_image: xcode11
+    compiler: clang
+    env:
+    - CXX=g++
+    - CC=gcc
 before_deploy:
-  - npm run build
-  - $(npm bin)/prebuild -r node -t 12.18.1
+- npm run build
+- "$(npm bin)/prebuild -r node -t 12.18.1"
 deploy:
   provider: releases
   api_key:
-    secure: H9Z/neUiVD9bVU+JoAoObCuNdx7kp7X0/lsmXBwF3bE/c2LyCBYe730/eP6mGvZqdQDSWb7DMR/3G+8j0Yfr3BkTFcILiKE80ZtyMV0PF89iFoGgIeYyWDb9egWnGLp1QVIXNOZefu4gMUwhPDWgWphHMslsaP2PBHa9x40VL+I=
+    secure: qRG/puEfbc29Jymt4VWLoy+vVh+9HqnOPL94m0qOzXXnT2sJIqurXZSO6P3uL4v6cLDMgaFZZsxmkKDYF3OUV4jzlmWJsL+9YK+AkRZZDm7h2OG8STvN07C6+/5FSaz+GQ9R4HP7LisW3imRH34Pra3q2dJaYnBKfMnysgJHX3+3WNlHmqrJjyOO1WX02gxfgsNJu0xFxB+VZ0s40d0rJhaNgJkwWlWjoIB/3Z7HYRq5PfKt01I3eRm918ESskFeYxALoTdhwYm+b/38cZyVAKYxIpAtbaGMw1jBO4yASqn+2XITexd8MPM2alC5nQRGwuVjBMvNYtx0Z7M/ffgB1Xas9egcI3YZUfSdvn5DixMiL+Cwf30vPN6hdl+4Q0xdozrGBW+GiKsQoOpdfN1NCYG+CJcEq6W2QxZEZmYDCaglGismGWOczPteIFs1FOzCG+25ZeLw0rkm6Hoy4any/wNmjh2WzTzKWlAQGkOoydBMo2T+F/umkWE27Eugew1Fy5TBUSJNAQ692wvOx4TILLsczK6TpNH2K6dYxlE2uuj9uuyscivxtvfgD7pVTG5U5dc7q2zO4sOXpOFXarUPEPnSLbnnTqwIvdJ05Qr8WCCKEeVw8DOcb7rEdXc2cdxmDrGOTcZ41WSbrztWxCG/0GYHOcMwjZLXAmGVOVVX8lI=
   file: prebuilds/*
   file_glob: true
   skip_cleanup: true
   on:
-    repo: gemini-testing/png-img
+    repo: DudaGod/png-img
+    node_js: '12'
     tags: true
-    node_js: "12"
